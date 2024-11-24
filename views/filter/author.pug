@@ -1,0 +1,16 @@
+extends ../layouts/main.pug
+
+block mainContent
+  .containerr
+    if posts.length > 0
+      h1 Publicaciones de #{posts[0].author.username} 
+      each post in posts
+        .post
+          h2= post.title
+          p= post.content
+          p Fechado: #{post.createdAt.toISOString().slice(0, 10)}
+
+    
+    else
+      p No se encontraron publicaciones para este autor.
+    a.button(href="/posts/all-post") Volver al inicio

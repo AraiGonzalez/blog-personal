@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="../css/style.css") 
+  body
+    header
+      .nav
+        form(action="/filter/author" method="GET" class="search-form")
+          input(type="text" name="username" placeholder="Buscar autor...")
+          button(type="submit") Buscar
+
+        form(action="/filter/category" method="GET" class="search-form")
+          select(name="category" required)
+            option(value="" disabled selected) Seleccionar categoría
+            option(value="Atención al cliente") Atención al cliente
+            option(value="Desafíos laborales") Desafíos laborales
+            option(value="Estadísticas de la empresa") Estadísticas de la empresa
+            option(value="Desarrollo profesional") Desarrollo profesional
+          button(type="submit") Filtrar
+          
+        if String(role) === 'admin'
+          a.button(href="/users/all") Ver Todos los Usuarios
+
+    block mainContent

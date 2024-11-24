@@ -1,0 +1,42 @@
+extends ../layouts/main.pug
+
+block mainContent
+  .containerr
+    if success_msg
+      p.success= success_msg
+    if error_msg
+      p.error= error_msg
+    h1 Publicaciones
+    a.button(href="/posts/create-post") Agregar Publicación
+    .posts
+      each post in posts
+        .post
+          .post-header
+            p.author User: #{post.author.username}
+            p.date Fecha: #{post.formattedCreatedAt}
+            p.category Categoría: #{post.category}
+          .post-content
+            h2= post.title
+            p= post.content
+          .post-actions
+            if post.author._id.toString() === userId.toString() || String(role) === 'admin'
+              if post.author._id.toString() === userId.toString()
+                a.button(href=`/posts/${post._id}/edit`) Editar
+              form(action=`/posts/${post._id}/delete` method="POST" style="display:inline")
+                button(type="submit" class="button delete") Eliminar
+
+          if post.comments && post.comments.length
+            .comments
+              h3 Comentarios
+              each comment in post.comments
+                .comment-plus
+                  p= comment.content
+                  p.author User: #{comment.author.username}
+                  p.date Fecha: #{comment.formattedCreatedAt}
+
+          h4 Agregar un comentario
+          form(action=`/posts/${post._id}/comment` method="POST" class="formm-container")
+            textarea(name="content" required placeholder="Escribe tu comentario aquí...").form-control
+            button(type="submit" class="button") Comentar
+
+    a.button(href="/auth/logout") Cerrar sesión

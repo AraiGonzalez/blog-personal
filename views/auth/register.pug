@@ -1,0 +1,18 @@
+extends ../layouts/main.pug
+
+block mainContent
+  .containerr
+    if error_msg
+      p.error= error_msg
+    if success_msg
+      p.success= success_msg
+    h1 Registrarse
+    form(action="/auth/register" method="POST" class="formm-container") 
+      label(for="username") Nombre de usuario:
+      input(type="text" name="username" required)
+      br
+      label(for="password") Contraseña:
+      input(type="password" name="password" required)
+      br
+      button(type="submit" class="button") Registrarse
+    a(href="/" class="button") Volver al inicio

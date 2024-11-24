@@ -1,0 +1,29 @@
+extends ../layouts/main.pug
+
+block mainContent
+   .containerr
+      if error_msg
+        p.error= error_msg
+      if success_msg
+        p.success= success_msg
+      h1 Crear Publicación
+      form(action="/posts/create-post" method="POST" class="form-public")
+        label(for="title") 
+        input(type="text" name="title" required placeholder="Titulo:" id="title-create-post")
+        br
+
+        label(for="content")
+        textarea(name="content" required placeholder=" Contenido:" id="textera")
+        br
+
+        select(name="category" required class="selector")
+          option(value="" disabled selected) Selecciona una categoría
+          option(value="Atención al cliente") Atención al cliente
+          option(value="Desafíos laborales") Desafíos laborales
+          option(value="Estadísticas de la empresa") Estadísticas de la empresa
+          option(value="Desarrollo profesional") Desarrollo profesional
+        br
+
+        button(type="submit" class="") Crear Publicación
+
+      

@@ -1,0 +1,29 @@
+extends ../layouts/main.pug
+
+block mainContent
+  .containerr
+    if posts.length > 0
+      h1 Publicaciones en la categoría "#{category}"
+      each post in posts
+        .post
+          h2= post.title
+          p= post.content
+          p.fecha Fechado: #{post.createdAt.toISOString().slice(0, 10)}
+          p.autor Autor: #{post.author.username}
+
+          if post.comments && post.comments.length
+            .comments
+              h3 Comentarios
+              each comment in post.comments
+                .comment
+                  p= comment.content
+                  p.autor Autor: #{comment.author.username}
+
+          h3 Agregar un comentario
+          form(action=`/posts/${post._id}/comment/category` method="POST" class="form-container")
+            textarea(name="content" required placeholder="Escribe tu comentario aquí...").form-control
+            br
+            button(type="submit" class="button") Comentar
+
+    else
+      p No se encontraron publicaciones en esta categoría.

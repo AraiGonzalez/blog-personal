@@ -1,0 +1,27 @@
+extends ../layouts/main.pug
+
+block mainContent
+  .container
+    if success_msg
+      p.success= success_msg
+    if error_msg
+      p.error= error_msg
+    h1= post.title
+    p.author User: #{post.author.username}
+    p.date Fecha: #{post.formattedCreatedAt}
+    p= post.content
+
+    if post.comments && post.comments.length
+      .comments
+        h3 Comentarios
+        each comment in post.comments
+          .comment
+            p= comment.content
+            p.author User: #{comment.author.username}
+
+    h3 Agregar un comentario
+    form(action=`/posts/${post._id}/comment` method="POST" class="formm-container")
+      textarea(name="content" required placeholder="Escribe tu comentario aquí...").form-control
+      button(type="submit" class="button") Comentar
+
+    a.button(href="/posts/all-post") Volver a publicaciones
