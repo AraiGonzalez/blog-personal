@@ -298,3 +298,25 @@ h4{
 #title-edit-post{
   margin-top: 10px;
 }
+.user-name {
+  width: 400px;
+}
+.actions{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+.user-item .button.delete{
+  border-radius: 0;
+  margin-left: 10px;
+}
+.etiqueta {
+  padding: 5px 10px;
+  border: none;
+  background-color: #00000066;
+  color: white;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.3s ease;
+}
