@@ -58,3 +58,23 @@ const connectDB = async () => {
 
 module.exports = connectDB;
 
+MODIFICACIONES (ARA) 
+agregue los estilos,cambios en main.pug, all-users.pug
+TESTEO:
+agregue user.test.js
+jest.setup.js 
+cambie de nombre app.js por index.js para deployar 
+en index.js modifique esto
+let server;
+if (process.env.NODE_ENV !== 'test') {
+  const PORT = process.env.PORT || 3000;
+  server = app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+module.exports = { app, server }; // Exporta la aplicación y el servidor
+exporta app y server para pruebas 
+para ejecutar los test poner por consola los siguientes comandos: 
+npm install  (solo por unica vez) 
+npm run test -- user.test.js  
